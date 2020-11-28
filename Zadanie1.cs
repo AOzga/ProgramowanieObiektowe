@@ -3,7 +3,7 @@
 
 namespace Kolokwium
 {
-    class Program
+    class Zadanie1
     {
         public static void Main(string[] args)
         {
