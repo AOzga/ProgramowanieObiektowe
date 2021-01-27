@@ -4,15 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace xxxxx
+namespace Kolokvioom
 {
-    public class Program
-    { 
-        static void Main()
-        {
-
-        }
-    }
     public abstract class Usluga
     {
         public Usluga(DateTime x)
@@ -43,7 +36,7 @@ namespace xxxxx
 
         public override string ToString()
         {
-            return "Połączenie: numer " + this.numer + " , data i godzina rozmowy:" + this.czas + " , długość trwania: " + this. czasP+ " , łączny koszt:" + this.cena;
+            return this.czas + " Połączenie: " + this.numer +  "  długość trwania: " + this. czasP+ " , łączny koszt:" + this.cena;
         }
 
 
@@ -63,7 +56,7 @@ namespace xxxxx
 
         public override string ToString()
         {
-            return this.czas + " numer : " + this.numer + "cena : " + this.cena + "";
+            return this.czas + " Sms: " + this.numer + " cena : " + this.cena;
         }
     }
 
@@ -83,7 +76,7 @@ namespace xxxxx
         }
         public override string ToString()
         {
-            return this.czas + " " + this.iloscMb + " " + this.cena;
+            return this.czas + " Internet: ilość mb zużytych:" + this.iloscMb + " Cena:  " + this.cena;
         }
 
     }
@@ -100,7 +93,7 @@ namespace xxxxx
 
     public class Telefon : Idodaj
     {
-        private List<Usluga> biling;
+        private List<Usluga> biling = new List<Usluga>();
 
         public void DodajInternet(int iloscMb)
         {
@@ -108,7 +101,7 @@ namespace xxxxx
         }
 
         public void DodajPolaczenie(string numer, int czasP)
-        {
+        { 
             biling.Add(new Polaczenie(DateTime.Now, numer, czasP));
         }
 
@@ -119,20 +112,14 @@ namespace xxxxx
 
         public override string ToString()
         {
-            string txt = "";
-            for(int i = 0; i > biling.Count; i++)
-            {
-                txt += (biling[i]) + Environment.NewLine;
-            }
+            string txt = string.Join(Environment.NewLine, biling);
             return txt;
         }
         public void ZapiszBiling()
         {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string txt = this.ToString();
-            System.IO.File.WriteAllText(@"\WriteText.txt", txt);
+            System.IO.File.WriteAllText(path + "\\test.txt", txt);
         }
     }
-
-
-
 }
